@@ -132,7 +132,36 @@ public:
       uint8_t status(void);
       uint8_t write(uint8_t reg, uint8_t data);
       uint8_t read(uint8_t reg);
+      uint8_t setOversampling(uint8_t reg);
+      uint8_t setIIRFilter(uint8_t reg);
+      uint8_t setGasEnable(uint8_t reg);
+      uint8_t setHeaterIndex(uint8_t reg);
+      uint8_t setHeaterOnTimeMs(uint8_t reg);
+      uint8_t setHeaterTemperatureC(uint8_t reg);
+      uint8_t setStandbyTimeMs(uint8_t reg);
+      uint8_t setHeaterSetPoints(uint8_t reg);
+      uint8_t setHeaterOnTimesMs(uint8_t reg);
+      uint8_t setHeaterTemperaturesC(uint8_t reg);
+      uint8_t setWaitTimeMs(uint8_t reg);
+      uint8_t setMode(uint8_t reg);
+      uint8_t begin(void);
+      uint8_t readTemperatureC(void);
+      uint8_t readTemperatureF(void);
+      uint8_t readHumidity(void);
+      uint8_t readDewpointC(void);
+      uint8_t readDewpointF(void);
+      uint8_t readPressureMbar(void);
+      uint8_t readPressureMmhg(void);
+      uint8_t readAltitudem(void);
+      uint8_t readAltitudeft(void);
+      uint8_t readVOC(void);
+
 private:
+      uint8_t convertCtoF(uint8_t reg);
+      uint8_t convertMtoFt(uint8_t reg);
+      uint8_t convertMbartoMmhg(uint8_t reg);
+
+
 };
 
 #endif
