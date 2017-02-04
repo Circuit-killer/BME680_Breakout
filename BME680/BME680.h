@@ -125,14 +125,42 @@
 #define BME680_CTRL_HUM             (0x72)    /* Controls humidity sensor settings */
 #define BME680_CTRL_MEAS            (0x74)    /* Controls measurement settings */
 
+// Structure to hold sensor settings
+struct SensorSettings
+{
+  public:
+      // Gas sensor Settings
+      uint8_t idac_heat[10]; // Heat 0-9
+      uint8_t gas_wait[10]; // Wait 0-9
+      uint8_t gas_wait_shared; //Not exactly sure here
+      uint8_t heat_off; // Setting to 1 turns the heater off
+      uint8_t heater_profile; // 0-10
+      uint8_t run_gas; // Set to 1 for conversion active
+      uint8_t wakeup_period; // See table 14
+
+      // Pressure, Temperature, and RH Settings
+      uint8_t humidity_oversampling; //0,1,2,4,8,16
+      uint8_t pressure_oversampling; //0,1,2,4,8,16
+      uint8_t temperature_oversampling; //0,1,2,4,8,16
+      uint8_t IIR_coefficient; //0,1,3,7,15,31,63,127
+
+      // General Control Settings
+      uint8_t spi_interrupt; // Set to 1 to enable, 3 wire SPI only
+      uint8_t spi_threewire; // Enables SPI 3 wire mode
+      uint8_t mode; // Sleep(0), Sequential(3), Parallel(2), Forced(1)
+};
+
 class BME680 {
 
 public:
+      SensorSettings settings;
       BME680();
       uint8_t status(void);
       uint8_t write(uint8_t reg, uint8_t data);
       uint8_t read(uint8_t reg);
-      uint8_t setOversampling(uint8_t reg);
+      uint8_t setTemperatureOversampling(uint8_t reg);
+      uint8_t setPressureOversampling(uint8_t reg);
+      uint8_t setHumidityOversampling(uint8_t reg);
       uint8_t setIIRFilter(uint8_t reg);
       uint8_t setGasEnable(uint8_t reg);
       uint8_t setHeaterIndex(uint8_t reg);
