@@ -142,6 +142,48 @@ uint8_t BME680::setIIRFilter(uint8_t iir_coeff){
     }
 }
 
+uint8_t BME680::setGasEnable(uint8_t gas_en){
+      setting.run_gas = gas_en;
+      return 0;
+}
+
+uint8_t BME680::setHeaterIndex(uint8_t VAR){
+
+}
+
+uint8_t BME680::setHeaterOnTimeMs(uint8_t VAR){
+
+}
+
+uint8_t BME680::setHeaterTemperatureC(uint8_t VAR){
+
+}
+
+uint8_t BME680::setStandbyTimeMs(uint8_t VAR){
+
+}
+
+uint8_t BME680::setHeaterSetPoints(uint8_t VAR){
+
+}
+
+uint8_t BME680::setHeaterOnTimesMs(uint8_t VAR){
+
+}
+
+uint8_t BME680::setHeaterTemperaturesC(uint8_t VAR){
+
+}
+
+uint8_t BME680::setWaitTimeMs(uint8_t VAR){
+
+}
+
+uint8_t BME680::setMode(uint8_t VAR){
+
+}
+
+
 uint8_t BME680::begin(void) {
     //
     // Forced mode
