@@ -147,16 +147,19 @@ uint8_t BME680::setGasEnable(uint8_t gas_en){
       return 0;
 }
 
-uint8_t BME680::setHeaterIndex(uint8_t VAR){
-
+uint8_t BME680::setHeaterIndex(uint8_t heater_index){
+      setting.heater_index  = heater_index;
+      return 0;
 }
 
-uint8_t BME680::setHeaterOnTimeMs(uint8_t VAR){
-
+uint8_t BME680::setHeaterOnTimeMs(uint8_t ontime){
+      setting.heater_on_time = ontime;
+      return 0;
 }
 
-uint8_t BME680::setHeaterTemperatureC(uint8_t VAR){
-
+uint8_t BME680::setHeaterTemperatureC(uint8_t temperature){
+      setting.heater_temperature = temperature;
+      return 0;
 }
 
 uint8_t BME680::setStandbyTimeMs(uint8_t VAR){
