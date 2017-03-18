@@ -80,10 +80,10 @@
 class BME680 {
 
 public:
-      BME680();
-      uint8_t status(void);
-      uint8_t write(uint8_t reg, uint8_t data);
-      uint8_t read(uint8_t reg);
+    BME680();
+    uint8_t status(void);
+    uint8_t write(uint8_t reg, uint8_t data);
+    uint8_t read(uint8_t reg);
 private:
 };
 
