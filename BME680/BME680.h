@@ -21,20 +21,20 @@
 #define BME680_FIELD0_PRESS_XLSB    (0x21)    /* XLSB of raw pressure measurement */
 
 // Temperature Data
-#define BME680_TEMP_MSB     (0x22)    /* MSB of raw temperature measurement */
-#define BME680_TEMP_LSB     (0x23)    /* LSB of raw temperature measurement */
-#define BME680_TEMP_XLSB    (0x24)    /* XLSB of raw temperature measurement */
+#define BME680_TEMP_MSB             (0x22)    /* MSB of raw temperature measurement */
+#define BME680_TEMP_LSB             (0x23)    /* LSB of raw temperature measurement */
+#define BME680_TEMP_XLSB            (0x24)    /* XLSB of raw temperature measurement */
 
 // Humidity Data
-#define BME680_HUM_MSB       (0x25)    /* MSB of raw humidity measurement */
-#define BME680_HUM_LSB       (0x26)    /* LSB of raw humidity measurement */
+#define BME680_HUM_MSB              (0x25)    /* MSB of raw humidity measurement */
+#define BME680_HUM_LSB              (0x26)    /* LSB of raw humidity measurement */
 
 // Gas data and range
-#define BME680_GAS_R_MSB       (0x2A)    /* MSB of raw gas measurement */
-#define BME680_GAS_R_LSB       (0x2B)    /* LSB of raw gas measurement */
+#define BME680_GAS_R_MSB            (0x2A)    /* MSB of raw gas measurement */
+#define BME680_GAS_R_LSB            (0x2B)    /* LSB of raw gas measurement */
 
 // New Data Status
-#define BME680_MEAS_STATUS_0 (0x1D)    /* New data flag for field 0 */
+#define BME680_MEAS_STATUS_0        (0x1D)    /* New data flag for field 0 */
 
 // Gas Control Registers
 #define BME680_IDAC_HEAT_0          (0x50)    /* idac_heat of particular heater set point */
