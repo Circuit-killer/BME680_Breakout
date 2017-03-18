@@ -80,10 +80,33 @@
 class BME680 {
 
 public:
+    SensorSettings settings;
     BME680();
-    uint8_t status(void);
     uint8_t write(uint8_t reg, uint8_t data);
     uint8_t read(uint8_t reg);
+    uint8_t status(void);
+    bool reset(void);
+    uint8_t get_chipid(void);
+    bool setHumidityOversampling(uint8_t osf);
+    bool setTemperatureOversampling(uint8_t osf);
+    bool setPressureOversampling(uint8_t osf);
+    bool setIIRFilter(uint8_t iir_coeff);
+    bool BME680::setIDACHeater(uint8_t idac_heat[10]);
+    bool BME680::setHeaterResistance(uint8_t heater_resistance[10]);
+    bool BME680::setGasWaitTime(uint8_t gas_wait[10]);
+    bool BME680::heaterOff(void);
+    bool BME680::heaterOn(void);
+    bool BME680::selectHeaterProfile(uint8t heater_profile);
+    bool BME680::runGas(bool run_gas);
+    uint8_t BME680::getGetRange(void);
+    bool BME680::newDataAvailable(void);
+    bool BME680::gasMeasuringStatus(void);
+    bool BME680::MeasuringStatus(void);
+    uint8_t BME680::gasMeasurementIndex(void);
+    bool BME680::gasValidStatus(void);
+    bool BME680::heaterStabilityStatus(void);
+
+
 private:
 };
 
