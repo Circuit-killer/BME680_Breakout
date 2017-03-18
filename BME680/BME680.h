@@ -10,9 +10,9 @@
 #include <Wire.h>
 
 #define BME680_I2C_ADDRESS          (0x77)   /* Device Address (default) */
-#define BME680_ID                   (0x50)   /* Chip ID of device */
+#define BME680_ID                   (0xD0)   /* Chip ID of device */
 #define BME680_STATUS               (0x73)   /* Status of the BME680 */
-#define BME680_RESET                (0x60)   /* Reset the sensor */
+#define BME680_RESET                (0xE0)   /* Reset the sensor */
 #define BME680_CONFIG               (0x75)   /*  General config register */
 
 // Pressure Data - Field 0
@@ -20,67 +20,21 @@
 #define BME680_FIELD0_PRESS_LSB     (0x20)    /* LSB of raw pressure measurement */
 #define BME680_FIELD0_PRESS_XLSB    (0x21)    /* XLSB of raw pressure measurement */
 
-// Pressure Data - Field 1
-#define BME680_FIELD1_PRESS_MSB     (0x30)    /* MSB of raw pressure measurement */
-#define BME680_FIELD1_PRESS_LSB     (0x31)    /* LSB of raw pressure measurement */
-#define BME680_FIELD1_PRESS_XLSB    (0x32)    /* XLSB of raw pressure measurement */
+// Temperature Data
+#define BME680_TEMP_MSB     (0x22)    /* MSB of raw temperature measurement */
+#define BME680_TEMP_LSB     (0x23)    /* LSB of raw temperature measurement */
+#define BME680_TEMP_XLSB    (0x24)    /* XLSB of raw temperature measurement */
 
-// Pressure Data - Field 2
-#define BME680_FIELD2_PRESS_MSB     (0x41)    /* MSB of raw pressure measurement */
-#define BME680_FIELD2_PRESS_LSB     (0x42)    /* LSB of raw pressure measurement */
-#define BME680_FIELD2_PRESS_XLSB    (0x43)    /* XLSB of raw pressure measurement */
+// Humidity Data
+#define BME680_HUM_MSB       (0x25)    /* MSB of raw humidity measurement */
+#define BME680_HUM_LSB       (0x26)    /* LSB of raw humidity measurement */
 
-// Temperature 1 Data - Field 0
-#define BME680_FIELD0_TEMP1_MSB     (0x22)    /* MSB of raw temperature measurement */
-#define BME680_FIELD0_TEMP1_LSB     (0x23)    /* LSB of raw temperature measurement */
-#define BME680_FIELD0_TEMP1_XLSB    (0x24)    /* XLSB of raw temperature measurement */
-
-// Temperature 1 Data - Field 1
-#define BME680_FIELD1_TEMP1_MSB     (0x33)    /* MSB of raw temperature measurement */
-#define BME680_FIELD1_TEMP1_LSB     (0x34)    /* LSB of raw temperature measurement */
-#define BME680_FIELD1_TEMP1_XLSB    (0x35)    /* XLSB of raw temperature measurement */
-
-// Temperature 1 Data - Field 2
-#define BME680_FIELD2_TEMP1_MSB     (0x44)    /* MSB of raw temperature measurement */
-#define BME680_FIELD2_TEMP1_LSB     (0x45)    /* LSB of raw temperature measurement */
-#define BME680_FIELD2_TEMP1_XLSB    (0x46)    /* XLSB of raw temperature measurement */
-
-// Humidity Data - Field 0
-#define BME680_FIELD0_HUM_MSB       (0x25)    /* MSB of raw humidity measurement */
-#define BME680_FIELD0_HUM_LSB       (0x26)    /* LSB of raw humidity measurement */
-
-// Humidity Data - Field 1
-#define BME680_FIELD1_HUM_MSB       (0x36)    /* MSB of raw humidity measurement */
-#define BME680_FIELD1_HUM_LSB       (0x37)    /* LSB of raw humidity measurement */
-
-// Humidity Data - Field 2
-#define BME680_FIELD2_HUM_MSB       (0x47)    /* MSB of raw humidity measurement */
-#define BME680_FIELD2_HUM_LSB       (0x48)    /* LSB of raw humidity measurement */
-
-// Gas Data - Field 0
-#define BME680_FIELD0_GAS_MSB       (0x2A)    /* MSB of raw gas measurement */
-#define BME680_FIELD0_GAS_LSB       (0x2B)    /* LSB of raw gas measurement */
-
-// Gas Data - Field 1
-#define BME680_FIELD1_GAS_MSB       (0x3B)    /* MSB of raw gas measurement */
-#define BME680_FIELD1_GAS_LSB       (0x3C)    /* LSB of raw gas measurement */
-
-// Gas Data - Field 2
-#define BME680_FIELD2_GAS_MSB       (0x4C)    /* MSB of raw gas measurement */
-#define BME680_FIELD2_GAS_LSB       (0x4D)    /* LSB of raw gas measurement */
-
-// Gas Resistance Range
-#define BME680_FIELD0_GAS_RANGE_LSB (0x2B)    /* ADC range of gas resistance */
-#define BME680_FIELD1_GAS_RANGE_LSB (0x3C)    /* ADC range of gas resistance */
-#define BME680_FIELD2_GAS_RANGE_LSB (0x4D)    /* ADC range of gas resistance */
+// Gas data and range
+#define BME680_GAS_R_MSB       (0x2A)    /* MSB of raw gas measurement */
+#define BME680_GAS_R_LSB       (0x2B)    /* LSB of raw gas measurement */
 
 // New Data Status
-#define BME680_FIELD0_MEAS_STATUS_0 (0x1D)    /* New data flag for field 0 */
-#define BME680_FIELD1_MEAS_STATUS_0 (0x2E)    /* New data flag for field 1 */
-#define BME680_FIELD2_MEAS_STATUS_0 (0x3F)    /* New data flag for field 2 */
-#define BME680_FIELD0_MEAS_STATUS_1 (0x1E)    /* New data flag for field 0 */
-#define BME680_FIELD1_MEAS_STATUS_1 (0x2F)    /* New data flag for field 1 */
-#define BME680_FIELD2_MEAS_STATUS_1 (0x40)    /* New data flag for field 2 */
+#define BME680_MEAS_STATUS_0 (0x1D)    /* New data flag for field 0 */
 
 // Gas Control Registers
 #define BME680_IDAC_HEAT_0          (0x50)    /* idac_heat of particular heater set point */
@@ -115,8 +69,6 @@
 #define BME680_GAS_WAIT_7           (0x6B)    /* Controls heater timing of the gas sensor */
 #define BME680_GAS_WAIT_8           (0x6C)    /* Controls heater timing of the gas sensor */
 #define BME680_GAS_WAIT_9           (0x6D)    /* Controls heater timing of the gas sensor */
-
-#define BME680_GAS_WAIT_SHARED      (0x6E)    /* Wait time between sub measurement sequences in parallel mode */
 
 #define BME680_CTRL_GAS_0           (0x70)    /* Gas sensor control settings */
 #define BME680_CTRL_GAS_1           (0x71)    /* Gas sensor control settings */
