@@ -32,6 +32,12 @@ private:
 public:
   BME680_Library(uint8_t i2c_addr = BME680_I2C_ADDR_SECONDARY);
   boolean begin(void);
+  boolean set_config(void);
+  boolean read_sensor(void);
+  int32_t gettemp(void);
+  int32_t getpres(void);
+  int32_t gethumidity(void);
+  int32_t getgas(void);
 
   uint8_t getDeviceID(void);
 };

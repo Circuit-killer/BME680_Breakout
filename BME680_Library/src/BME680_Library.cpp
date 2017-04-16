@@ -20,6 +20,67 @@ boolean BME680_Library::begin(void){
   return (com_rslt == BME680_COMM_RES_OK);
 }
 
+boolean BME680_Library::set_config(void){
+  // Select sensor configuration parameters
+  set_conf_sensor[0].heatr_ctrl = BME680_HEATR_CTRL_ENABLE;
+  set_conf_sensor[0].run_gas = BME680_RUN_GAS_ENABLE;
+  set_conf_sensor[0].nb_conv = 0x00;
+  set_conf_sensor[0].osrs_hum = BME680_OSRS_1X;
+  set_conf_sensor[0].osrs_pres = BME680_OSRS_1X;
+  set_conf_sensor[0].osrs_temp = BME680_OSRS_1X;
+
+  // Activate Sensor configuration
+  enum bme680_return_type com_rslt = bme680_set_sensor_config(&set_conf_sensor[0], &bme680_sensor_no[0]);
+
+  // Select Heather Configuraton Parameters
+  set_heatr_conf_sensor[0].heater_temp[0] = 300;
+  set_heatr_conf_sensor[0].heatr_idacv[0] = 1;
+  set_heatr_conf_sensor[0].heatr_dur[0] = 137;
+  set_heatr_conf_sensor[0].profile_cnt = 1;
+
+  // Activate Heater Configuration
+  bme680_set_gas_heater_config(&set_heatr_conf_sensor[0], &bme680_sensor_no[0]);
+
+  // Set power mode as forced mode
+  bme680_set_power_mode(BME680_FORCED_MODE, &bme680_sensor_no[0]);
+  delay_msec(100);
+  return 1;
+}
+
+boolean BME680_Library::read_sensor(void){
+  // Set power mode as forced mode
+  bme680_set_power_mode(BME680_FORCED_MODE, &bme680_sensor_no[0]);
+  delay_msec(100);
+  // Get uncompensated T+P+G+H data
+  bme680_get_uncomp_data(uncompensated_data_of_sensor[0], 1, BME680_ALL, &bme680_sensor_no[0]);
+
+  // Get the compensated T+P+G+H data
+  bme680_compensate_data(uncompensated_data_of_sensor[0], compensate_data_sensor[0], 1, BME680_ALL, &bme680_sensor_no[0]);
+
+  // Put sensor into sleep mode explicitly
+  bme680_set_power_mode(BME680_SLEEP_MODE, &bme680_sensor_no[0]);
+
+  // Call user define delay function (duration in milliseconds)
+  delay_msec(100);
+  //User_define_delay(100);
+}
+
+int32_t BME680_Library::gettemp(void){
+  return compensate_data_sensor[0][0].comp_temperature1;
+}
+
+int32_t BME680_Library::getpres(void){
+  return compensate_data_sensor[0][0].comp_pressure;
+}
+
+int32_t BME680_Library::gethumidity(void){
+  return compensate_data_sensor[0][0].comp_humidity;
+}
+
+int32_t BME680_Library::getgas(void){
+  return compensate_data_sensor[0][0].comp_gas;
+}
+
 uint8_t BME680_Library::getDeviceID(void){
   return bme680_sensor_no[0].chip_id;
 }
